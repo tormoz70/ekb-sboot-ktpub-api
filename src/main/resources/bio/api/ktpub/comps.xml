@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cursor xmlns="http://bio4j.ru/biodef-repo/store"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://bio4j.ru/biodef-repo/store http://bio4j.ru/biodef-repo/store/store-v11.xsd"
+        multiselection="true">
+    <SQL action="select">
+        <text><![CDATA[
+select * from table(${ktpub_api.current.vesion}.getComps('0', :p_released, :p_subn, :p_search_query))
+        ]]></text>
+        <param type="string" name="p_released"/>
+        <param type="string" name="p_subn"/>
+        <param type="string" name="p_search_query"/>
+    </SQL>
+    <fields>
+        <field type="integer" name="rnum$pgng" attrName="index_number"/>
+        <field type="string" name="ogrn" pk="true" attrName="id"/>
+        <field type="string" name="studia" sorter="studia_sort" attrName="name"/>
+        <field type="string" name="pcodes"/>
+        <field type="string" name="filmnames"/>
+        <field type="string" name="filmnames_sort" attrName="movie"/>
+        <field type="string" name="flags"/>
+        <field type="string" name="pus"/>
+        <field type="integer" name="comps_count" attrName="total_companies"/>
+        <field type="integer" name="films_count" attrName="total_movies"/>
+        <field type="string" name="govsupp_rev" sorter="govsupp_rev_sort" attrName="refundable_support"/>
+        <field type="string" name="govsupp_irr" sorter="govsupp_irr_sort" attrName="nonrefundable_support"/>
+        <field type="decimal" name="govsupp_sort" attrName="total_support"/>
+        <field type="string" name="unobl_debt" sorter="unobl_debt_sort" attrName="unfulfilledObligationsDebt"/>
+        <field type="string" name="unobl_cost" sorter="unobl_cost_sort" attrName="unfulfilledObligationsCost"/>
+        <field type="string" name="summ" sorter="summ_sort" attrName="box_office"/>
+        <field type="string" name="tckts" sorter="tckts_sort" attrName="audience"/>
+    </fields>
+    <defaultSort>
+        <field name="govsupp_sort" direction="DESC"></field>
+    </defaultSort>
+</cursor>
