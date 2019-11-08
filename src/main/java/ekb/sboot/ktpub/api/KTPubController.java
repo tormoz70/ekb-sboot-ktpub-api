@@ -5,9 +5,8 @@ import ekb.sboot.ktpub.api.models.Hint;
 import ekb.sboot.ktpub.api.models.RspHint;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.*;
-import ru.bio4j.spring.helpers.jdbcHelper;
+import ru.bio4j.spring.dba.JdbcHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class KTPubController extends AbstractRestHandler {
     private static final int AUTH_FAILURE = 102;
 
     @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private JdbcHelper jdbcHelper;
 
     @GetMapping
     public BaseResponse showStatus() {
@@ -44,7 +43,7 @@ public class KTPubController extends AbstractRestHandler {
         prms.put("p_subn", "0");
         prms.put("query$value", null);
 
-        rslt.setResponse(jdbcHelper.query(jdbcTemplate, sql, prms, Hint.class));
+        rslt.setResponse(jdbcHelper.query(sql, prms, Hint.class));
         return rslt;
     }
 }

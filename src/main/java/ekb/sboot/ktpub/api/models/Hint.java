@@ -1,6 +1,6 @@
 package ekb.sboot.ktpub.api.models;
 
-import ru.bio4j.spring.helpers.model.Mapper;
+import ru.bio4j.spring.common.model.Mapper;
 
 public class Hint {
     private String id;

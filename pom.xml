@@ -77,13 +77,10 @@
 
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <!-- integration with Swagger API doc generation http://goo.gl/J5FQDM -->
@@ -99,15 +96,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${ojdbc.version}</version>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>bio4j-spring</groupId>
-            <artifactId>bio4j-spring-helpers</artifactId>
+            <groupId>ru.bio4j.spring</groupId>
+            <artifactId>bio4j-spring-boot-jdbc-helper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
