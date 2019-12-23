@@ -6,6 +6,8 @@ import ekb.sboot.ktpub.api.models.RspHint;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.bio4j.spring.common.LogWrapper;
+import ru.bio4j.spring.common.security.SecurityFilterBase;
 import ru.bio4j.spring.dba.JdbcHelper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/ktpub-api")
 public class KTPubController extends AbstractRestHandler {
+    LogWrapper LOG = LogWrapper.getLogger(SecurityFilterBase.class);
 
     private final String sharedKey = "SHARED_KEY";
 
@@ -35,15 +38,17 @@ public class KTPubController extends AbstractRestHandler {
     @GetMapping("/search/hints")
     @ApiOperation(value = "Produce hints dictionary.", notes = "Returns list of hint objects in holder.")
     public RspHint hints(HttpServletRequest request) {
+        LOG.debug("Start process request {hints}...");
         RspHint rslt = new RspHint();
-        String sql = "select * from table(KTPUB_API13.getHints(:p_released, :p_unoblig, :p_subn, :query$value))";
+        String sql = "select * from table(KTPUB_API18.getHints(:p_released, :p_unoblig, :p_subn, :p_query))";
         Map<String, Object> prms = new HashMap<>();
-        prms.put("p_released", "0");
         prms.put("p_unoblig", "0");
+        prms.put("p_released", "1");
         prms.put("p_subn", "0");
-        prms.put("query$value", null);
+        prms.put("p_query", null);
 
         rslt.setResponse(jdbcHelper.query(sql, prms, Hint.class));
+        LOG.debug("End processing request {hints}!");
         return rslt;
     }
 }
