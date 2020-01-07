@@ -1,16 +1,21 @@
 package ekb.sboot.ktpub.api;
 
+import ekb.sboot.ktpub.api.exception.DataFormatException;
 import ekb.sboot.ktpub.api.models.BaseResponse;
 import ekb.sboot.ktpub.api.models.Hint;
 import ekb.sboot.ktpub.api.models.RspHint;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.bio4j.spring.common.LogWrapper;
 import ru.bio4j.spring.common.security.SecurityFilterBase;
 import ru.bio4j.spring.dba.JdbcHelper;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +39,11 @@ public class KTPubController extends AbstractRestHandler {
         return new BaseResponse(SUCCESS_STATUS, 1);
     }
 
+    @PostMapping("/login")
+    @ApiOperation(value = "Produce login func.", notes = "Returns UserDetails.")
+    public UserDetails login(HttpServletRequest request, Principal principal) {
+        return null;
+    }
 
     @GetMapping("/search/hints")
     @ApiOperation(value = "Produce hints dictionary.", notes = "Returns list of hint objects in holder.")
